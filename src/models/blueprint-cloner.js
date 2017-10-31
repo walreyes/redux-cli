@@ -14,7 +14,7 @@ export default class BlueprintCloner {
   }
 
   clone() {
-    const blueprint  = this.blueprint;
+    const blueprint = this.blueprint;
     this.ui.writeInfo('cloning blueprint...');
 
     const cloneToDirectory = this.cloneToDirectory();
@@ -25,7 +25,7 @@ export default class BlueprintCloner {
   }
 
   cloneFiles(sourceDirectory, cloneToDirectory, files) {
-    files.forEach((file) => {
+    files.forEach(file => {
       let sourcePath = path.resolve(sourceDirectory, file);
       let destinationPath = path.resolve(cloneToDirectory, file);
       this.cloneFile(sourcePath, destinationPath);
@@ -55,26 +55,32 @@ export default class BlueprintCloner {
     const settings = this.options.settings;
 
     // settings.blueprints.searchPaths[0] will be settings.cloneTo
-    return path.resolve(settings.blueprints.searchPaths[0], this.newBlueprintName());
+    return path.resolve(
+      settings.blueprints.searchPaths[0],
+      this.newBlueprintName()
+    );
   }
 
   newBlueprintName() {
     const options = this.options;
 
-    if(options.entity) {
+    if (options.entity) {
       return options.entity.name;
     }
   }
 
   blueprintFiles() {
     const blueprint = this.blueprint;
-    let blueprintFiles = walkSync(blueprint.path, { directories: false, ignore: FILES_BLACKLIST });
+    let blueprintFiles = walkSync(blueprint.path, {
+      directories: false,
+      ignore: FILES_BLACKLIST
+    });
     blueprintFiles = this.filterBlacklistedFiles(blueprintFiles);
     return blueprintFiles;
   }
 
   filterBlacklistedFiles(files) {
-    return files.filter((file) => !this.isBlacklistedFile(file));
+    return files.filter(file => !this.isBlacklistedFile(file));
   }
 
   isBlacklistedFile(file) {
