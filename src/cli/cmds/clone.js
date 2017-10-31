@@ -6,7 +6,7 @@ const usage = `Usage:
 
 module.exports = {
   command: 'clone <blueprint> <name>',
-  aliases: ['g', 'gen'],
+  aliases: [],
   describe: 'Clone a blueprint with a different name',
   builder: yargs => {
     yargs
