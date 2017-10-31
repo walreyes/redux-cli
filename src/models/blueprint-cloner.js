@@ -7,9 +7,9 @@ import { fileExists } from '../util/fs';
 const FILES_BLACKLIST = ['.ds_store', '.git', '.gitkeep'];
 
 export default class BlueprintCloner {
-  constructor(blueprint, options) {
+  constructor(blueprint, options = {}) {
     this.blueprint = blueprint;
-    this.options = options || {};
+    this.options = options;
     this.ui = options.ui;
   }
 
