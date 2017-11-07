@@ -10,8 +10,7 @@ export default class extends Task {
     const blueprint = this.lookupBlueprint(blueprintName);
 
     const entity = {
-      name: cliArgs.entity.name,
-      options: cliArgs.entity.options
+      name: cliArgs.name
     };
 
     const blueprintOptions = {

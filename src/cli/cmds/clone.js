@@ -1,8 +1,10 @@
-import buildBlueprintCommands from './clone/build-blueprint-commands';
+import getHandler from '../handler';
+import handlers from './clone/handlers';
+
+getHandler().onRun('clone', handlers.handleRun);
 
 const usage = `Usage:
-  $0 clone <blueprint> <name>
-  $0 help clone <blueprint>`;
+  $0 clone <blueprint> <name>`;
 
 module.exports = {
   command: 'clone <blueprint> <name>',
@@ -16,20 +18,8 @@ module.exports = {
         describe: "List files but don't generate them",
         type: 'boolean'
       })
-      .option('verbose', {
-        alias: 'v',
-        describe: 'Verbose output, including file contents',
-        type: 'boolean'
-      })
-      .group(['dry-run', 'verbose', 'help'], 'Generate Options:')
-      .updateStrings({
-        'Commands:': 'Blueprints:',
-        'Options:': 'Blueprint Options:'
-      });
-    return buildBlueprintCommands().reduce(
-      (yargs, command) => yargs.command(command),
-      yargs
-    );
-  },
-  handler: argv => console.error(`Unrecognised blueprint '${argv.blueprint}'`)
+      .group(['dry-run', 'help'], 'Clone Options:');
+
+    return yargs;
+  }
 };
